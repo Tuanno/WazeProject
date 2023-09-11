@@ -1,0 +1,23 @@
+setup(): Essa função é chamada uma vez no início do programa. Ela cria o canvas onde a aplicação será desenhada, define o tamanho do canvas com base no tamanho do mapa da cidade, desativa o loop de desenho (noLoop()) para que o desenho não seja atualizado continuamente e, em seguida, chama drawMap() para desenhar o mapa inicial.
+
+drawMap(): Esta função desenha o mapa da cidade na tela. Ela percorre a matriz currentCityMap, que representa o mapa da cidade, e desenha retângulos para cada célula do mapa. A cor do retângulo depende do valor na matriz: 0 para células vazias (cor cinza claro), 1 para células com estradas (cor cinza escuro) e 2 para obstáculos (cor vermelha).
+
+draw(): Esta função é chamada continuamente após o setup(). Ela atualiza o desenho na tela. Primeiro, ela limpa o fundo do canvas com a cor branca (background(255)), em seguida, chama drawMap() para redesenhar o mapa atual, drawPath() para desenhar o caminho encontrado, e drawStartAndEndPoints() para desenhar os pontos de início e fim.
+
+drawPath(): Esta função desenha o caminho encontrado na tela. Ela utiliza a função beginShape() e endShape() para desenhar uma linha vermelha que conecta os pontos do caminho.
+
+drawStartAndEndPoints(): Esta função desenha os pontos de início (verde) e fim (vermelho) na tela. Ela verifica se os pontos de início e fim estão definidos e, se estiverem, desenha círculos coloridos representando-os no mapa.
+
+toggleAddObstacles(): Esta função é chamada quando o botão "Adicionar Obstáculos" é pressionado. Ela alterna o valor da variável addObstacles, que controla se você está em modo de adição de obstáculos ou não.
+
+mousePressed(): Esta função é chamada quando o mouse é pressionado. Se addObstacles for verdadeiro, ela adiciona obstáculos ao mapa quando você clica nas células vazias. Caso contrário, ela define os pontos de início e fim, calcula o caminho entre eles e atualiza o desenho.
+
+calculateRoute(start, end): Esta função calcula o caminho entre dois pontos usando o algoritmo A* (A estrela). Ela utiliza listas de nós abertos e fechados para explorar possíveis caminhos até encontrar o ponto de destino. Retorna um array com os pontos que compõem o caminho encontrado.
+
+getNeighbors(point): Esta função retorna uma lista de vizinhos válidos para um determinado ponto no mapa. Ela verifica os vizinhos nas direções direita, abaixo, esquerda e acima, e verifica se eles estão dentro dos limites do mapa e não são obstáculos.
+
+heuristic(point, end): Esta função calcula a heurística de distância entre dois pontos. Ela é usada pelo algoritmo A* para estimar a distância entre um ponto e o destino. Neste caso, utiliza a distância de Manhattan (soma das diferenças nas coordenadas x e y).
+
+reconstructPath(current): Esta função reconstrói o caminho percorrido a partir do ponto de destino até o ponto de início. Ela segue os pais de cada ponto no caminho de volta até o início e retorna o caminho completo.
+
+switchCityMap(): Esta função é chamada quando o botão "Alternar Mapa" é pressionado. Ela alternas entre os dois mapas da cidade (cityMap1 e cityMap2), redimensiona o canvas de acordo com o novo mapa, e redefine os pontos de início, fim e caminho, em seguida, redesenha o mapa.
